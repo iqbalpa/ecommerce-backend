@@ -14,7 +14,6 @@ authRouter.post("/register", async (req: Request, res: Response) => {
 		email: req.body.email,
 		name: req.body.name,
 		password: hashedPassword,
-		role: req.body.role,
 	};
 	const newUser: User = await createUser(userData);
 	const userResponse: UserResponse = {
@@ -73,11 +72,11 @@ authRouter.get("/user-detail", userAuth, async (req: Request, res: Response) => 
 
 authRouter.put("/update/:id", userAuth, async (req: Request, res: Response) => {
 	const id: number = parseInt(req.params.id);
+	const hashedPassword: string = await hashPassword(req.body.password);
 	const userData: UserRequest = {
 		email: req.body.email,
 		name: req.body.name,
-		password: req.body.password,
-		role: req.body.role,
+		password: hashedPassword,
 	};
 	const updatedUser: User = await updateUser(id, userData);
 	const userResponse: UserResponse = {
