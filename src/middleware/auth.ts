@@ -36,3 +36,16 @@ export function adminAuth(req: Request, res: Response, next: NextFunction) {
 	// if the authorization token is invalid or missing returning a 401 error
 	res.status(401).send("Unauthorized");
 }
+
+// user can update and delete their own account
+export function manageAccountAuth(req: Request, res: Response, next: NextFunction) {
+	const currentUserEmail: string = req.user.email;
+	const targetUserEmail: string = req.body.email;
+	if (currentUserEmail !== targetUserEmail) {
+		res.status(401).json({
+			message: "you have no permission to manage this account",
+			error: "unauthorized",
+		});
+	}
+	return next();
+}
