@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { requestLogger } from "./middleware/logger";
-import authRouter from "./routes/auth";
-import productRouter from "./routes/product";
+import authRouter from "./auth/auth.controller";
+import productRouter from "./product/product.controller";
 import { userAuth } from "./middleware/auth";
 
 const cors = require("cors");

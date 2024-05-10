@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import { Product } from "@prisma/client";
-import { ProductRequest } from "../dto/product";
-import { getAllProduct, getProductById, createProduct, updateProduct, deleteProduct } from "../repository/product";
+import { ProductRequest } from "./dto/product.dto";
+import { getAllProduct, getProductById, createProduct, updateProduct, deleteProduct } from "./product.service";
 
 const productRouter = Router();
 

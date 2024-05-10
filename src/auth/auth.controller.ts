@@ -1,9 +1,10 @@
 import { Router, Request, Response } from "express";
 import { Admin, User } from "@prisma/client";
-import { AdminRequest, AdminResponse, UserRequest, UserResponse } from "../dto/user";
+import { UserRequest, UserResponse } from "./dto/user.dto";
+import { AdminRequest, AdminResponse } from "./dto/admin.dto";
 import { hashPassword, verifyPassword } from "../utils/auth";
 import { createToken } from "../utils/jwt";
-import { createUser, getUser, updateUser, deleteUser, createAdmin } from "../repository/auth";
+import { createUser, getUser, updateUser, deleteUser, createAdmin } from "./auth.service";
 import { userAuth } from "../middleware/auth";
 
 const authRouter = Router();
