@@ -47,13 +47,20 @@ authRouter.get("/user-detail", userAuth, async (req: Request, res: Response) => 
 });
 
 authRouter.put("/update", userAuth, async (req: Request, res: Response) => {
-	const email: string = req.body.email;
+	const currentUserEmail: string = req.user.email;
+	const targetUserEmail: string = req.body.email;
+	if (currentUserEmail !== targetUserEmail) {
+		res.status(401).json({
+			message: "you have no permission to update this account",
+			error: "unauthorized",
+		});
+	}
 	const userData: UserRequest = {
 		email: req.body.email,
 		name: req.body.name,
 		password: req.body.password,
 	};
-	const updatedUser: UserResponse = await authService.updateUser(email, userData);
+	const updatedUser: UserResponse = await authService.updateUser(targetUserEmail, userData);
 	res.status(200).json({
 		message: "user updated",
 		data: updatedUser,
@@ -61,8 +68,15 @@ authRouter.put("/update", userAuth, async (req: Request, res: Response) => {
 });
 
 authRouter.delete("/delete", userAuth, async (req: Request, res: Response) => {
-	const email: string = req.body.email;
-	const deletedUser: UserResponse = await authService.deleteUser(email);
+	const currentUserEmail: string = req.user.email;
+	const targetUserEmail: string = req.body.email;
+	if (currentUserEmail !== targetUserEmail) {
+		res.status(401).json({
+			message: "you have no permission to delete this account",
+			error: "unauthorized",
+		});
+	}
+	const deletedUser: UserResponse = await authService.deleteUser(targetUserEmail);
 	res.status(200).json({
 		message: "user deleted",
 		data: deletedUser,
