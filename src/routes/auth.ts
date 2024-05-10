@@ -3,7 +3,7 @@ import { User } from "@prisma/client";
 import { UserRequest, UserResponse } from "../dto/user";
 import { hashPassword, verifyPassword } from "../utils/auth";
 import { createToken } from "../utils/jwt";
-import { createUser, getUser, updateUser, deleteUser } from "../services/auth";
+import { createUser, getUser, updateUser, deleteUser } from "../repository/auth";
 import { userAuth } from "../middleware/auth";
 
 const authRouter = Router();
