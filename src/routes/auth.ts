@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { User } from "../models/user";
+import { User } from "@prisma/client";
 import { UserRequest, UserResponse } from "../dto/user";
 import { hashPassword, verifyPassword } from "../utils/auth";
 import { createToken } from "../utils/jwt";
