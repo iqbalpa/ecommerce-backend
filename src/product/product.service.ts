@@ -1,39 +1,36 @@
-import { PrismaClient } from "@prisma/client";
+import { Product } from "@prisma/client";
 import { ProductRequest } from "./dto/product.dto";
+import productRepository from "./product.repository";
 
-const prisma = new PrismaClient();
-
-export const createProduct = async (product: ProductRequest) => {
-	return prisma.product.create({
-		data: product,
-	});
+const getAllProduct = async (): Promise<Product[]> => {
+	const products: Product[] = await productRepository.getAllProduct();
+	return products;
 };
 
-export const getProductById = async (id: number) => {
-	return prisma.product.findUnique({
-		where: {
-			id: id,
-		},
-	});
+const getProductById = async (id: number): Promise<Product | null> => {
+	const product: Product | null = await productRepository.getProductById(id);
+	return product;
 };
 
-export const getAllProduct = async () => {
-	return prisma.product.findMany({});
+const createProduct = async (product: ProductRequest): Promise<Product> => {
+	const newProduct: Product = await productRepository.createProduct(product);
+	return newProduct;
 };
 
-export const updateProduct = async (id: number, product: ProductRequest) => {
-	return prisma.product.update({
-		where: {
-			id: id,
-		},
-		data: product,
-	});
+const updateProduct = async (id: number, product: ProductRequest): Promise<Product> => {
+	const updatedProduct: Product = await productRepository.updateProduct(id, product);
+	return updatedProduct;
 };
 
-export const deleteProduct = async (id: number) => {
-	return prisma.product.delete({
-		where: {
-			id: id,
-		},
-	});
+const deleteProduct = async (id: number): Promise<Product> => {
+	const deletedProduct: Product = await productRepository.deleteProduct(id);
+	return deletedProduct;
+};
+
+export default {
+	getAllProduct,
+	getProductById,
+	createProduct,
+	updateProduct,
+	deleteProduct,
 };
