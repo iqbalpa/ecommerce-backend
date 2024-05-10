@@ -18,7 +18,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/auth", authRouter);
-app.use("/product", productRouter, userAuth);
-app.use("/wishlist", wishlistRouter, userAuth);
+app.use("/product", userAuth, productRouter);
+app.use("/wishlist", userAuth, wishlistRouter);
 
 export default app;

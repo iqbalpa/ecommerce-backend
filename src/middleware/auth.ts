@@ -3,6 +3,7 @@ import { verifyToken } from "../utils/jwt";
 
 export function userAuth(req: Request, res: Response, next: NextFunction) {
 	const authenticationToken = req.headers["authorization"];
+	console.log(authenticationToken);
 
 	if (authenticationToken !== undefined) {
 		const decodedToken = verifyToken(authenticationToken);
@@ -24,8 +25,8 @@ export function adminAuth(req: Request, res: Response, next: NextFunction) {
 
 	if (authenticationToken !== undefined) {
 		const decodedToken = verifyToken(authenticationToken);
-		
-		if (decodedToken.role === "admin") {
+
+		if (decodedToken.role === "ADMIN") {
 			return next();
 		}
 	}
