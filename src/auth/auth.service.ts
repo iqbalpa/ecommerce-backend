@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { UserRequest, AdminRequest } from "../dto/user";
+import { UserRequest } from "./dto/user.dto";
+import { AdminRequest } from "./dto/admin.dto";
 
 const prisma = new PrismaClient();
 
