@@ -22,10 +22,11 @@ model Admin {
   id          Int       @default(autoincrement()) @id
   email       String    @unique
   password    String
-  role        Role      @default(ADMIN)
-  listProduct Product[] 
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  role        Role      @default(ADMIN)
+  
+  listProduct Product[] 
 }
 
 model User {
@@ -33,10 +34,11 @@ model User {
   email       String          @unique
   name        String
   password    String
-  role        Role            @default(USER)
-  wishlist    UserProduct[]
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
+  role        Role            @default(USER)
+
+  wishlist    UserProduct[]
 }
 
 model Product {
@@ -46,17 +48,20 @@ model Product {
   price       String
   stock       Int
   image       String
-  admin       Admin           @relation(fields: [adminId], references: [id])
   adminId     Int
-  listUser    UserProduct[]
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
+
+  listUser    UserProduct[]
+  admin       Admin           @relation(fields: [adminId], references: [id])
 }
 
 model UserProduct {
-  id          Int             @default(autoincrement()) @id
-  user        User            @relation(fields: [userId], references: [id])
   userId      Int
-  product     Product         @relation(fields: [productId], references: [id])
   productId   Int
+
+  user        User            @relation(fields: [userId], references: [id])
+  product     Product         @relation(fields: [productId], references: [id])
+
+  @@id([userId, productId])
 }

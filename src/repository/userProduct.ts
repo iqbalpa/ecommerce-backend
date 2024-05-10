@@ -11,11 +11,13 @@ export const createUserProduct = (userId: number, productId: number) => {
 	});
 };
 
-// the parameter should be userId and productId
-export const deleteUserProduct = (id: number) => {
+export const deleteUserProduct = (userId: number, productId: number) => {
 	return prisma.userProduct.delete({
 		where: {
-			id: id,
+			userId_productId: {
+				userId: userId,
+				productId: productId,
+			},
 		},
 	});
 };
