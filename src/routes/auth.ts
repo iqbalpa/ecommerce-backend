@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express";
-import { User } from "../models/user";
-import { UserRequest, UserResponse } from "../dto/user";
+import { Admin, User } from "@prisma/client";
+import { AdminRequest, AdminResponse, UserRequest, UserResponse } from "../dto/user";
 import { hashPassword, verifyPassword } from "../utils/auth";
 import { createToken } from "../utils/jwt";
-import { createUser, getUser, updateUser, deleteUser } from "../services/auth";
+import { createUser, getUser, updateUser, deleteUser, createAdmin } from "../repository/auth";
 import { userAuth } from "../middleware/auth";
 
 const authRouter = Router();
@@ -102,6 +102,23 @@ authRouter.delete("/delete/:id", userAuth, async (req: Request, res: Response) =
 		updatedAt: deletedUser.updatedAt,
 	};
 	res.json(userResponse).status(200);
+});
+
+authRouter.post("/register-admin", async (req: Request, res: Response) => {
+	const hashedPassword: string = await hashPassword(req.body.password);
+	const adminData: AdminRequest = {
+		email: req.body.email,
+		password: hashedPassword,
+	};
+	const newAdmin: Admin = await createAdmin(adminData);
+	const adminResponse: AdminResponse = {
+		id: newAdmin.id,
+		email: newAdmin.email,
+		role: newAdmin.role,
+		createdAt: newAdmin.createdAt,
+		updatedAt: newAdmin.updatedAt,
+	};
+	res.status(201).json({ data: adminResponse });
 });
 
 export default authRouter;

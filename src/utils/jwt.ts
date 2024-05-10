@@ -1,4 +1,4 @@
-import { User } from "../models/user";
+import { User } from "@prisma/client";
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -21,6 +21,6 @@ export const createToken = (user: User) => {
 };
 
 export const verifyToken = (token: string) => {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    return decoded;
+	const decoded = jwt.verify(token, JWT_SECRET);
+	return decoded;
 };
