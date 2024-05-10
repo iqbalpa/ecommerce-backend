@@ -7,10 +7,11 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
 export const createToken = (user: User) => {
 	const token = jwt.sign(
 		{
-			id: user.id,
-			email: user.email,
-			name: user.name,
-			role: user.role,
+			user: user,
+			// id: user.id,
+			// email: user.email,
+			// name: user.name,
+			// role: user.role,
 		},
 		JWT_SECRET,
 		{
