@@ -22,6 +22,7 @@ productRouter.get("/:id", async (req: Request, res: Response) => {
 	}
 });
 
+// need to extract and get the adminId from token
 productRouter.post("/", async (req: Request, res: Response) => {
 	const productData: ProductRequest = {
 		name: req.body.name,
