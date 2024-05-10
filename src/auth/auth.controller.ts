@@ -34,7 +34,7 @@ authRouter.post("/login", async (req: Request, res: Response) => {
 });
 
 authRouter.get("/user-detail", userAuth, async (req: Request, res: Response) => {
-	const email: string = req.body.email;
+	const email: string = req.user.email;
 	const user: UserResponse | string = await authService.getUserDetail(email);
 	if (typeof user === "string") {
 		res.status(404).json({ error: user });
