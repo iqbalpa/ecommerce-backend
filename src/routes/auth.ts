@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { Admin, User } from "@prisma/client";
-import { AdminRequest, UserRequest, UserResponse } from "../dto/user";
+import { AdminRequest, AdminResponse, UserRequest, UserResponse } from "../dto/user";
 import { hashPassword, verifyPassword } from "../utils/auth";
 import { createToken } from "../utils/jwt";
 import { createUser, getUser, updateUser, deleteUser, createAdmin } from "../repository/auth";
@@ -111,7 +111,14 @@ authRouter.post("/register-admin", async (req: Request, res: Response) => {
 		password: hashedPassword,
 	};
 	const newAdmin: Admin = await createAdmin(adminData);
-	res.status(201).json({ data: newAdmin });
+	const adminResponse: AdminResponse = {
+		id: newAdmin.id,
+		email: newAdmin.email,
+		role: newAdmin.role,
+		createdAt: newAdmin.createdAt,
+		updatedAt: newAdmin.updatedAt,
+	};
+	res.status(201).json({ data: adminResponse });
 });
 
 export default authRouter;
