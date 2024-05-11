@@ -2,11 +2,11 @@ import { User, Admin } from "@prisma/client";
 import { UserRequest, UserResponse } from "./dto/user.dto";
 import { AdminRequest, AdminResponse } from "./dto/admin.dto";
 import authRepository from "./auth.repository";
-import { hashPassword, verifyPassword } from "../utils/auth";
-import { createToken } from "../utils/jwt";
+import authUtils from "../utils/auth";
+import jwtUtils from "../utils/jwt";
 
 const registerUser = async (user: UserRequest): Promise<UserResponse> => {
-	const hashedPassword: string = await hashPassword(user.password);
+	const hashedPassword: string = await authUtils.hashPassword(user.password);
 	const userData: UserRequest = {
 		...user,
 		password: hashedPassword,
@@ -28,11 +28,11 @@ const loginUser = async (email: string, password: string): Promise<{ ur: UserRes
 	if (!user) {
 		return `user with email ${email} is not found`;
 	} else {
-		const isPasswordValid: boolean = await verifyPassword(password, user.password);
+		const isPasswordValid: boolean = await authUtils.verifyPassword(password, user.password);
 		if (!isPasswordValid) {
 			return "invalid password";
 		} else {
-			const token: string = createToken(user);
+			const token: string = jwtUtils.createToken(user);
 			const userResponse: UserResponse = {
 				id: user.id,
 				email: user.email,
@@ -64,7 +64,7 @@ const getUserDetail = async (email: string): Promise<UserResponse | string> => {
 };
 
 const updateUser = async (email: string, user: UserRequest): Promise<UserResponse> => {
-	const hashedPassword: string = await hashPassword(user.password);
+	const hashedPassword: string = await authUtils.hashPassword(user.password);
 	const userData: UserRequest = {
 		email: user.email,
 		name: user.name,
@@ -96,7 +96,7 @@ const deleteUser = async (email: string): Promise<UserResponse> => {
 };
 
 const registerAdmin = async (admin: AdminRequest): Promise<AdminResponse> => {
-	const hashedPassword: string = await hashPassword(admin.password);
+	const hashedPassword: string = await authUtils.hashPassword(admin.password);
 	const adminData: AdminRequest = {
 		...admin,
 		password: hashedPassword,

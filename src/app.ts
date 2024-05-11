@@ -3,7 +3,7 @@ import { requestLogger } from "./middleware/logger";
 import authRouter from "./auth/auth.controller";
 import productRouter from "./product/product.controller";
 import wishlistRouter from "./wishlist/wishlist.controller";
-import { userAuth } from "./middleware/auth";
+import authMiddleware from "./middleware/auth";
 
 const cors = require("cors");
 
@@ -18,7 +18,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/auth", authRouter);
-app.use("/product", userAuth, productRouter);
-app.use("/wishlist", userAuth, wishlistRouter);
+app.use("/product", authMiddleware.userAuth, productRouter);
+app.use("/wishlist", authMiddleware.userAuth, wishlistRouter);
 
 export default app;

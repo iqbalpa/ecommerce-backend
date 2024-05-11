@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import { UserRequest, UserResponse } from "./dto/user.dto";
 import { AdminRequest, AdminResponse } from "./dto/admin.dto";
-import { manageAccountAuth, userAuth } from "../middleware/auth";
+import authMiddleware from "../middleware/auth";
 import authService from "./auth.service";
 import handler from "../utils/handler";
 
@@ -31,7 +31,7 @@ authRouter.post("/login", async (req: Request, res: Response) => {
 	}
 });
 
-authRouter.get("/user-detail", userAuth, async (req: Request, res: Response) => {
+authRouter.get("/user-detail", authMiddleware.userAuth, async (req: Request, res: Response) => {
 	const email: string = req.user.email;
 	const user: UserResponse | string = await authService.getUserDetail(email);
 	if (typeof user === "string") {
@@ -41,22 +41,32 @@ authRouter.get("/user-detail", userAuth, async (req: Request, res: Response) => 
 	}
 });
 
-authRouter.put("/update", userAuth, manageAccountAuth, async (req: Request, res: Response) => {
-	const email: string = req.body.email;
-	const userData: UserRequest = {
-		email: req.body.email,
-		name: req.body.name,
-		password: req.body.password,
-	};
-	const updatedUser: UserResponse = await authService.updateUser(email, userData);
-	handler.successHandler({ message: "user updated", data: updatedUser, status: 200 }, res);
-});
+authRouter.put(
+	"/update",
+	authMiddleware.userAuth,
+	authMiddleware.manageAccountAuth,
+	async (req: Request, res: Response) => {
+		const email: string = req.body.email;
+		const userData: UserRequest = {
+			email: req.body.email,
+			name: req.body.name,
+			password: req.body.password,
+		};
+		const updatedUser: UserResponse = await authService.updateUser(email, userData);
+		handler.successHandler({ message: "user updated", data: updatedUser, status: 200 }, res);
+	}
+);
 
-authRouter.delete("/delete", userAuth, manageAccountAuth, async (req: Request, res: Response) => {
-	const email: string = req.body.email;
-	const deletedUser: UserResponse = await authService.deleteUser(email);
-	handler.successHandler({ message: "user deleted", data: deletedUser, status: 200 }, res);
-});
+authRouter.delete(
+	"/delete",
+	authMiddleware.userAuth,
+	authMiddleware.manageAccountAuth,
+	async (req: Request, res: Response) => {
+		const email: string = req.body.email;
+		const deletedUser: UserResponse = await authService.deleteUser(email);
+		handler.successHandler({ message: "user deleted", data: deletedUser, status: 200 }, res);
+	}
+);
 
 authRouter.post("/register-admin", async (req: Request, res: Response) => {
 	const adminData: AdminRequest = {
