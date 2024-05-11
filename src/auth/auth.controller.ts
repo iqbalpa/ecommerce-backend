@@ -1,17 +1,22 @@
 import { Router, Request, Response } from "express";
+// Service
+import authService from "./auth.service";
+// DTO
 import { UserRequest, UserResponse } from "./dto/user.dto";
 import { AdminRequest, AdminResponse } from "./dto/admin.dto";
+// Middleware
 import authMiddleware from "../middleware/auth";
-import authService from "./auth.service";
+import inputValidatorMiddleware from "./validator/inputValidator";
+// Utils
 import handler from "../utils/handler";
 
 const authRouter = Router();
 
 authRouter.post(
 	"/register",
-	authMiddleware.isEmailValid,
-	authMiddleware.isPasswordValid,
-	authMiddleware.isNameValid,
+	inputValidatorMiddleware.isEmailValid,
+	inputValidatorMiddleware.isPasswordValid,
+	inputValidatorMiddleware.isNameValid,
 	async (req: Request, res: Response) => {
 		const userData: UserRequest = {
 			email: req.body.email,
@@ -25,8 +30,8 @@ authRouter.post(
 
 authRouter.post(
 	"/login",
-	authMiddleware.isEmailValid,
-	authMiddleware.isPasswordValid,
+	inputValidatorMiddleware.isEmailValid,
+	inputValidatorMiddleware.isPasswordValid,
 	async (req: Request, res: Response) => {
 		const email: string = req.body.email;
 		const password: string = req.body.password;
@@ -45,7 +50,7 @@ authRouter.post(
 authRouter.get(
 	"/user-detail",
 	authMiddleware.userAuth,
-	authMiddleware.isEmailValid,
+	inputValidatorMiddleware.isEmailValid,
 	async (req: Request, res: Response) => {
 		const email: string = req.user.email;
 		const user: UserResponse | string = await authService.getUserDetail(email);
@@ -61,9 +66,9 @@ authRouter.put(
 	"/update",
 	authMiddleware.userAuth,
 	authMiddleware.manageAccountAuth,
-	authMiddleware.isEmailValid,
-	authMiddleware.isPasswordValid,
-	authMiddleware.isNameValid,
+	inputValidatorMiddleware.isEmailValid,
+	inputValidatorMiddleware.isPasswordValid,
+	inputValidatorMiddleware.isNameValid,
 	async (req: Request, res: Response) => {
 		const email: string = req.body.email;
 		const userData: UserRequest = {
@@ -80,9 +85,9 @@ authRouter.delete(
 	"/delete",
 	authMiddleware.userAuth,
 	authMiddleware.manageAccountAuth,
-	authMiddleware.isEmailValid,
-	authMiddleware.isPasswordValid,
-	authMiddleware.isNameValid,
+	inputValidatorMiddleware.isEmailValid,
+	inputValidatorMiddleware.isPasswordValid,
+	inputValidatorMiddleware.isNameValid,
 	async (req: Request, res: Response) => {
 		const email: string = req.body.email;
 		const deletedUser: UserResponse = await authService.deleteUser(email);
@@ -92,8 +97,8 @@ authRouter.delete(
 
 authRouter.post(
 	"/register-admin",
-	authMiddleware.isEmailValid,
-	authMiddleware.isPasswordValid,
+	inputValidatorMiddleware.isEmailValid,
+	inputValidatorMiddleware.isPasswordValid,
 	async (req: Request, res: Response) => {
 		const adminData: AdminRequest = {
 			email: req.body.email,
