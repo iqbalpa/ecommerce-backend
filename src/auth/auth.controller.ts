@@ -1,8 +1,9 @@
 import { Router, Request, Response } from "express";
 import { UserRequest, UserResponse } from "./dto/user.dto";
 import { AdminRequest, AdminResponse } from "./dto/admin.dto";
-import { userAuth } from "../middleware/auth";
+import authMiddleware from "../middleware/auth";
 import authService from "./auth.service";
+import handler from "../utils/handler";
 
 const authRouter = Router();
 
@@ -13,10 +14,7 @@ authRouter.post("/register", async (req: Request, res: Response) => {
 		password: req.body.password,
 	};
 	const user: UserResponse = await authService.registerUser(userData);
-	res.status(201).json({
-		message: "user registered",
-		data: user,
-	});
+	handler.successHandler({ message: "user registered", data: user, status: 201 }, res);
 });
 
 authRouter.post("/login", async (req: Request, res: Response) => {
@@ -24,50 +22,51 @@ authRouter.post("/login", async (req: Request, res: Response) => {
 	const password: string = req.body.password;
 	const data: { ur: UserResponse; token: string } | string = await authService.loginUser(email, password);
 	if (typeof data === "string") {
-		res.status(404).json({ error: data });
+		handler.errorHandler({ message: data, data: data, status: 404 }, res);
 	} else {
-		res.status(200).json({
-			data: data.ur,
-			token: data.token,
-		});
+		handler.successHandler(
+			{ message: "login success", data: { user: data.ur, token: data.token }, status: 200 },
+			res
+		);
 	}
 });
 
-authRouter.get("/user-detail", userAuth, async (req: Request, res: Response) => {
-	const email: string = req.body.email;
+authRouter.get("/user-detail", authMiddleware.userAuth, async (req: Request, res: Response) => {
+	const email: string = req.user.email;
 	const user: UserResponse | string = await authService.getUserDetail(email);
 	if (typeof user === "string") {
-		res.status(404).json({ error: user });
+		handler.errorHandler({ message: user, data: user, status: 404 }, res);
 	} else {
-		res.status(200).json({
-			message: "use detailed retrieved",
-			data: user,
-		});
+		handler.successHandler({ message: "user detail retrieved", data: user, status: 200 }, res);
 	}
 });
 
-authRouter.put("/update", userAuth, async (req: Request, res: Response) => {
-	const email: string = req.body.email;
-	const userData: UserRequest = {
-		email: req.body.email,
-		name: req.body.name,
-		password: req.body.password,
-	};
-	const updatedUser: UserResponse = await authService.updateUser(email, userData);
-	res.status(200).json({
-		message: "user updated",
-		data: updatedUser,
-	});
-});
+authRouter.put(
+	"/update",
+	authMiddleware.userAuth,
+	authMiddleware.manageAccountAuth,
+	async (req: Request, res: Response) => {
+		const email: string = req.body.email;
+		const userData: UserRequest = {
+			email: req.body.email,
+			name: req.body.name,
+			password: req.body.password,
+		};
+		const updatedUser: UserResponse = await authService.updateUser(email, userData);
+		handler.successHandler({ message: "user updated", data: updatedUser, status: 200 }, res);
+	}
+);
 
-authRouter.delete("/delete", userAuth, async (req: Request, res: Response) => {
-	const email: string = req.body.email;
-	const deletedUser: UserResponse = await authService.deleteUser(email);
-	res.status(200).json({
-		message: "user deleted",
-		data: deletedUser,
-	});
-});
+authRouter.delete(
+	"/delete",
+	authMiddleware.userAuth,
+	authMiddleware.manageAccountAuth,
+	async (req: Request, res: Response) => {
+		const email: string = req.body.email;
+		const deletedUser: UserResponse = await authService.deleteUser(email);
+		handler.successHandler({ message: "user deleted", data: deletedUser, status: 200 }, res);
+	}
+);
 
 authRouter.post("/register-admin", async (req: Request, res: Response) => {
 	const adminData: AdminRequest = {
@@ -75,10 +74,7 @@ authRouter.post("/register-admin", async (req: Request, res: Response) => {
 		password: req.body.password,
 	};
 	const admin: AdminResponse = await authService.registerAdmin(adminData);
-	res.status(200).json({
-		message: "admin registered",
-		data: admin,
-	});
+	handler.successHandler({ message: "admin registered", data: admin, status: 201 }, res);
 });
 
 export default authRouter;
