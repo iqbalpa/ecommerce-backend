@@ -32,28 +32,17 @@ function adminAuth(req: Request, res: Response, next: NextFunction) {
 function manageAccountAuth(req: Request, res: Response, next: NextFunction) {
 	const currentUserEmail: string = req.user.email;
 	const targetUserEmail: string = req.body.email;
-	if (currentUserEmail !== targetUserEmail) {
-		handler.errorHandler(
-			{ message: "you have no permission to manage this account", status: 401, data: "unauthorized" },
-			res
-		);
+	if (currentUserEmail === targetUserEmail) {
+		return next();
 	}
-	return next();
+	handler.errorHandler(
+		{ message: "you have no permission to manage this account", status: 401, data: "unauthorized" },
+		res
+	);
 }
-
-const validateRequest = (validator: (req: Request) => boolean) => {
-	console.log("inside validateRequest middleware");
-	return (req: Request, res: Response, next: NextFunction) => {
-		if (!validator(req)) {
-			return handler.errorHandler({ message: "Invalid request", data: {}, status: 400 }, res);
-		}
-		next();
-	};
-};
 
 export default {
 	userAuth,
 	adminAuth,
 	manageAccountAuth,
-	validateRequest,
 };
