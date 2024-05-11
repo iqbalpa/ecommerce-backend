@@ -41,8 +41,19 @@ function manageAccountAuth(req: Request, res: Response, next: NextFunction) {
 	return next();
 }
 
+const validateRequest = (validator: (req: Request) => boolean) => {
+	console.log("inside validateRequest middleware");
+	return (req: Request, res: Response, next: NextFunction) => {
+		if (!validator(req)) {
+			return handler.errorHandler({ message: "Invalid request", data: {}, status: 400 }, res);
+		}
+		next();
+	};
+};
+
 export default {
 	userAuth,
 	adminAuth,
 	manageAccountAuth,
+	validateRequest,
 };
