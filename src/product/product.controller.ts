@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { Product } from "@prisma/client";
 import { ProductRequest } from "./dto/product.dto";
 import productService from "./product.service";
+import authMiddleware from "../middleware/auth";
 
 const productRouter = Router();
 
@@ -22,21 +23,20 @@ productRouter.get("/:id", async (req: Request, res: Response) => {
 	}
 });
 
-// need to extract and get the adminId from token
-productRouter.post("/", async (req: Request, res: Response) => {
+productRouter.post("/", authMiddleware.adminAuth, async (req: Request, res: Response) => {
 	const productData: ProductRequest = {
 		name: req.body.name,
 		description: req.body.description,
 		price: req.body.price,
 		stock: parseInt(req.body.stock),
 		image: req.body.image,
-		adminId: parseInt(req.body.adminId),
+		adminId: req.admin.id,
 	};
 	const newProduct: Product = await productService.createProduct(productData);
 	res.status(201).json({ data: newProduct });
 });
 
-productRouter.put("/:id", async (req: Request, res: Response) => {
+productRouter.put("/:id", authMiddleware.adminAuth, async (req: Request, res: Response) => {
 	const id: number = parseInt(req.params.id);
 	const productData: ProductRequest = {
 		name: req.body.name,
@@ -44,13 +44,13 @@ productRouter.put("/:id", async (req: Request, res: Response) => {
 		price: req.body.price,
 		stock: parseInt(req.body.stock),
 		image: req.body.image,
-		adminId: parseInt(req.body.adminId),
+		adminId: req.admin.id,
 	};
 	const updatedProduct: Product = await productService.updateProduct(id, productData);
 	res.status(200).json({ data: updatedProduct });
 });
 
-productRouter.delete("/:id", async (req: Request, res: Response) => {
+productRouter.delete("/:id", authMiddleware.adminAuth, async (req: Request, res: Response) => {
 	const id: number = parseInt(req.params.id);
 	const deletedProduct: Product = await productService.deleteProduct(id);
 	res.status(200).json({

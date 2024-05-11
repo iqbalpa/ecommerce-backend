@@ -4,9 +4,8 @@ import { UserProduct } from "@prisma/client";
 
 const wishlistRouter = Router();
 
-// userId can be retrieved from token information
 wishlistRouter.post("/", async (req: Request, res: Response) => {
-	const userId: number = parseInt(req.body.userId);
+	const userId: number = req.user.id;
 	const productId: number = parseInt(req.body.productId);
 	const newWishlist: UserProduct = await wishlistService.createWishlist(userId, productId);
 	res.status(201).json({
@@ -16,7 +15,7 @@ wishlistRouter.post("/", async (req: Request, res: Response) => {
 });
 
 wishlistRouter.delete("/", async (req: Request, res: Response) => {
-	const userId: number = parseInt(req.body.userId);
+	const userId: number = req.user.id;
 	const productId: number = parseInt(req.body.productId);
 	const deletedWishlist: UserProduct = await wishlistService.deleteWishlist(userId, productId);
 	res.status(200).json({
