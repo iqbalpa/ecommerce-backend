@@ -1,6 +1,7 @@
 import { Router, Request, Response } from "express";
-import wishlistService from "./wishlist.service";
 import { UserProduct } from "@prisma/client";
+// Service
+import wishlistService from "./wishlist.service";
 
 const wishlistRouter = Router();
 

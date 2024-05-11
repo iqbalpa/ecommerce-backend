@@ -1,7 +1,10 @@
 import { Router, Request, Response } from "express";
 import { Product } from "@prisma/client";
-import { ProductRequest } from "./dto/product.dto";
+// Service
 import productService from "./product.service";
+// DTO
+import { ProductRequest } from "./dto/product.dto";
+// Middleware
 import authMiddleware from "../middleware/auth";
 
 const productRouter = Router();
