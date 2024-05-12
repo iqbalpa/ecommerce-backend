@@ -65,12 +65,12 @@ authRouter.get(
 authRouter.put(
 	"/update",
 	authMiddleware.userAuth,
-	authMiddleware.manageAccountAuth,
 	inputValidatorMiddleware.isEmailValid,
+	inputValidatorMiddleware.isEmailExist,
 	inputValidatorMiddleware.isPasswordValid,
 	inputValidatorMiddleware.isNameValid,
 	async (req: Request, res: Response) => {
-		const email: string = req.body.email;
+		const email: string = req.user.email;
 		const userData: UserRequest = {
 			email: req.body.email,
 			name: req.body.name,
@@ -81,19 +81,11 @@ authRouter.put(
 	}
 );
 
-authRouter.delete(
-	"/delete",
-	authMiddleware.userAuth,
-	authMiddleware.manageAccountAuth,
-	inputValidatorMiddleware.isEmailValid,
-	inputValidatorMiddleware.isPasswordValid,
-	inputValidatorMiddleware.isNameValid,
-	async (req: Request, res: Response) => {
-		const email: string = req.body.email;
-		const deletedUser: UserResponse = await authService.deleteUser(email);
-		handler.successHandler({ message: "user deleted", data: deletedUser, status: 200 }, res);
-	}
-);
+authRouter.delete("/delete", authMiddleware.userAuth, async (req: Request, res: Response) => {
+	const email: string = req.user.email;
+	const deletedUser: UserResponse = await authService.deleteUser(email);
+	handler.successHandler({ message: "user deleted", data: deletedUser, status: 200 }, res);
+});
 
 authRouter.post(
 	"/register-admin",
