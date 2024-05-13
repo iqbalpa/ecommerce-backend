@@ -1,7 +1,10 @@
 import { User, Admin } from "@prisma/client";
+// Repository
+import authRepository from "./auth.repository";
+// DTO
 import { UserRequest, UserResponse } from "./dto/user.dto";
 import { AdminRequest, AdminResponse } from "./dto/admin.dto";
-import authRepository from "./auth.repository";
+// Utils
 import authUtils from "../utils/auth";
 import jwtUtils from "../utils/jwt";
 

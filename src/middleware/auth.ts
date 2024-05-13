@@ -32,13 +32,13 @@ function adminAuth(req: Request, res: Response, next: NextFunction) {
 function manageAccountAuth(req: Request, res: Response, next: NextFunction) {
 	const currentUserEmail: string = req.user.email;
 	const targetUserEmail: string = req.body.email;
-	if (currentUserEmail !== targetUserEmail) {
-		handler.errorHandler(
-			{ message: "you have no permission to manage this account", status: 401, data: "unauthorized" },
-			res
-		);
+	if (currentUserEmail === targetUserEmail) {
+		return next();
 	}
-	return next();
+	handler.errorHandler(
+		{ message: "you have no permission to manage this account", status: 401, data: "unauthorized" },
+		res
+	);
 }
 
 export default {

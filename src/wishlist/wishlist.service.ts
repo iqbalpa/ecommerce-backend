@@ -1,4 +1,5 @@
 import { UserProduct } from "@prisma/client";
+// Repository
 import wishlistRepository from "./wishlist.repository";
 
 const createWishlist = async (userId: number, productId: number): Promise<UserProduct> => {
