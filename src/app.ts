@@ -2,7 +2,8 @@ import express, { Request, Response } from "express";
 import { requestLogger } from "./middleware/logger";
 import authRouter from "./auth/auth.controller";
 import productRouter from "./product/product.controller";
-import { userAuth } from "./middleware/auth";
+import wishlistRouter from "./wishlist/wishlist.controller";
+import authMiddleware from "./middleware/auth";
 
 const cors = require("cors");
 
@@ -17,6 +18,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use("/auth", authRouter);
-app.use("/product", productRouter, userAuth);
+app.use("/product", authMiddleware.userAuth, productRouter);
+app.use("/wishlist", authMiddleware.userAuth, wishlistRouter);
 
 export default app;

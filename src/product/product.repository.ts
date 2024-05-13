@@ -1,4 +1,5 @@
 import { PrismaClient, Product } from "@prisma/client";
+// DTO
 import { ProductRequest } from "./dto/product.dto";
 
 const prisma = new PrismaClient();

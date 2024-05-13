@@ -1,6 +1,8 @@
 import { Product } from "@prisma/client";
-import { ProductRequest } from "./dto/product.dto";
+// Repository
 import productRepository from "./product.repository";
+// DTO
+import { ProductRequest } from "./dto/product.dto";
 
 const getAllProduct = async (): Promise<Product[]> => {
 	const products: Product[] = await productRepository.getAllProduct();

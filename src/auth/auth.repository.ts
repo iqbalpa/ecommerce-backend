@@ -1,4 +1,5 @@
 import { PrismaClient, User, Admin } from "@prisma/client";
+// DTO
 import { UserRequest } from "./dto/user.dto";
 import { AdminRequest } from "./dto/admin.dto";
 
