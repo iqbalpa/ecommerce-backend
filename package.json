@@ -9,7 +9,8 @@
 		"dev": "npx nodemon src/index.ts",
 		"build": "tsc",
 		"serve": "node dist/index.js",
-		"db:migrate": "npx prisma migrate dev --name init"
+		"db:migrate": "npx prisma migrate dev --name init",
+		"db:reset": "npx ts-node prisma/reset.ts"
 	},
 	"author": "",
 	"license": "ISC",
