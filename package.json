@@ -12,7 +12,7 @@
 		"db:migrate": "npx prisma migrate dev --name init",
 		"db:reset": "npx ts-node prisma/reset.ts"
 	},
-	"author": "",
+	"author": "iqbalpa",
 	"license": "ISC",
 	"devDependencies": {
 		"@types/express": "^4.17.21",
