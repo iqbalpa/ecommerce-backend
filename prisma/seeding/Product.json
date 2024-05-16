@@ -1,0 +1,395 @@
+[
+	{
+		"name": "Cozy Knit Scarf",
+		"description": "Soft, warm, and stylish.",
+		"price": "19.99",
+		"stock": 35,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Antique Brass Compass",
+		"description": "A vintage-inspired navigation tool.",
+		"price": "49.95",
+		"stock": 12,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Handcrafted Leather Journal",
+		"description": "Perfect for capturing your thoughts and ideas.",
+		"price": "24.50",
+		"stock": 28,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Ceramic Teapot Set",
+		"description": "Elegant set for your afternoon tea.",
+		"price": "39.90",
+		"stock": 8,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Vintage Style Wall Clock",
+		"description": "Add a touch of retro charm to your home.",
+		"price": "59.99",
+		"stock": 15,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Essential Oil Diffuser",
+		"description": "Create a calming and relaxing atmosphere.",
+		"price": "29.95",
+		"stock": 42,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Stainless Steel Water Bottle",
+		"description": "Stay hydrated on the go.",
+		"price": "14.99",
+		"stock": 55,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Wireless Bluetooth Speaker",
+		"description": "Portable speaker with great sound quality.",
+		"price": "79.99",
+		"stock": 20,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Bamboo Cutting Board Set",
+		"description": "Durable and eco-friendly cutting boards.",
+		"price": "27.50",
+		"stock": 31,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Organic Cotton Throw Blanket",
+		"description": "Soft, cozy, and made with natural materials.",
+		"price": "34.99",
+		"stock": 18,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Handmade Soap Bar",
+		"description": "All-natural soap with soothing scents.",
+		"price": "5.99",
+		"stock": 72,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Garden Tool Set",
+		"description": "Essential tools for your gardening needs.",
+		"price": "44.95",
+		"stock": 9,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Coffee Bean Grinder",
+		"description": "Grind your own fresh coffee beans.",
+		"price": "39.99",
+		"stock": 25,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Solar Powered Lantern",
+		"description": "Light up your nights with eco-friendly energy.",
+		"price": "24.99",
+		"stock": 38,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Bluetooth Headphones",
+		"description": "Wireless headphones for music and calls.",
+		"price": "99.99",
+		"stock": 14,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Yoga Mat",
+		"description": "Non-slip mat for your yoga practice.",
+		"price": "19.99",
+		"stock": 60,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Polarized Sunglasses",
+		"description": "Protect your eyes with stylish shades.",
+		"price": "49.95",
+		"stock": 11,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Camping Tent",
+		"description": "Spacious tent for your outdoor adventures.",
+		"price": "129.99",
+		"stock": 7,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Hiking Backpack",
+		"description": "Comfortable backpack with plenty of storage.",
+		"price": "69.99",
+		"stock": 23,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Bicycle Helmet",
+		"description": "Stay safe while cycling with a helmet.",
+		"price": "39.99",
+		"stock": 30,
+		"image": "",
+		"adminId": 3
+	},
+
+	{
+		"name": "Travel Neck Pillow",
+		"description": "Memory foam for comfortable travel.",
+		"price": "12.99",
+		"stock": 48,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Stainless Steel Cookware Set",
+		"description": "High-quality pots and pans for your kitchen.",
+		"price": "199.99",
+		"stock": 5,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Portable Hammock",
+		"description": "Relax anywhere with this lightweight hammock.",
+		"price": "39.95",
+		"stock": 27,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Handwoven Basket",
+		"description": "Stylish storage for your home.",
+		"price": "18.50",
+		"stock": 33,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Reusable Grocery Bags",
+		"description": "Eco-friendly bags for your shopping trips.",
+		"price": "9.99",
+		"stock": 65,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Digital Camera",
+		"description": "Capture high-quality photos and videos.",
+		"price": "249.99",
+		"stock": 10,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Board Game Collection",
+		"description": "Fun games for family and friends.",
+		"price": "49.99",
+		"stock": 17,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Leather Wallet",
+		"description": "Slim and stylish wallet for everyday use.",
+		"price": "34.95",
+		"stock": 22,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Waterproof Phone Case",
+		"description": "Protect your phone from water and dust.",
+		"price": "19.99",
+		"stock": 52,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Running Shoes",
+		"description": "Comfortable shoes for your workouts.",
+		"price": "89.99",
+		"stock": 13,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Desk Organizer",
+		"description": "Keep your workspace tidy and organized.",
+		"price": "15.99",
+		"stock": 41,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Personalized Mug",
+		"description": "Add your own photo or message.",
+		"price": "12.99",
+		"stock": 59,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Art Print Set",
+		"description": "Decorate your walls with unique artwork.",
+		"price": "29.95",
+		"stock": 26,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Notebook and Pen Set",
+		"description": "Perfect for journaling and note-taking.",
+		"price": "14.99",
+		"stock": 47,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Candle Set",
+		"description": "Scented candles for a cozy atmosphere.",
+		"price": "24.99",
+		"stock": 34,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Kitchen Knife Set",
+		"description": "Essential knives for your culinary adventures.",
+		"price": "59.99",
+		"stock": 8,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Smartwatch",
+		"description": "Track your fitness and stay connected.",
+		"price": "149.99",
+		"stock": 16,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Portable Charger",
+		"description": "Never run out of battery on the go.",
+		"price": "29.95",
+		"stock": 29,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Bluetooth Keyboard",
+		"description": "Slim and portable keyboard for your devices.",
+		"price": "49.99",
+		"stock": 21,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Pet Bed",
+		"description": "Cozy bed for your furry friend.",
+		"price": "29.99",
+		"stock": 37,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Plant Pot",
+		"description": "Stylish pot for your indoor plants.",
+		"price": "12.99",
+		"stock": 44,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Floor Lamp",
+		"description": "Modern lamp for your living room.",
+		"price": "79.99",
+		"stock": 6,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Tablecloth",
+		"description": "Elegant tablecloth for your dining table.",
+		"price": "24.95",
+		"stock": 19,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Towel Set",
+		"description": "Soft and absorbent towels for your bathroom.",
+		"price": "39.99",
+		"stock": 50,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Picture Frame",
+		"description": "Display your favorite photos.",
+		"price": "9.99",
+		"stock": 61,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Hair Dryer",
+		"description": "Powerful dryer for quick styling.",
+		"price": "49.99",
+		"stock": 12,
+		"image": "",
+		"adminId": 1
+	},
+	{
+		"name": "Air Purifier",
+		"description": "Improve air quality in your home.",
+		"price": "99.99",
+		"stock": 9,
+		"image": "",
+		"adminId": 3
+	},
+	{
+		"name": "Electric Kettle",
+		"description": "Boil water quickly and easily.",
+		"price": "24.95",
+		"stock": 28,
+		"image": "",
+		"adminId": 2
+	},
+	{
+		"name": "Coffee Maker",
+		"description": "Brew your favorite coffee at home.",
+		"price": "59.99",
+		"stock": 15,
+		"image": "",
+		"adminId": 1
+	}
+]
