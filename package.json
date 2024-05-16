@@ -10,7 +10,8 @@
 		"build": "tsc",
 		"serve": "node dist/index.js",
 		"db:migrate": "npx prisma migrate dev --name init",
-		"db:reset": "npx ts-node prisma/reset.ts"
+		"db:reset": "npx ts-node prisma/reset.ts",
+		"db:seed": "npx ts-node prisma/seed.ts"
 	},
 	"author": "",
 	"license": "ISC",
